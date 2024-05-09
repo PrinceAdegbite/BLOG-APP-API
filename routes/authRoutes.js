@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const User = require('../models/User')
 const nodemailer = require('nodemailer')
 
@@ -57,7 +57,7 @@ router.post('/login', async (req, res) => {
          })
        }
 
-       const isMatch = await bcrypt.compare(password, user.password);
+       const isMatch = await bcryptjs.compare(password, user.password);
        if(!isMatch) {
         return res.status(400).json({
             message: 'Invalid credentials'
